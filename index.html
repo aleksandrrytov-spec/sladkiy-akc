@@ -62,10 +62,9 @@
   .stat-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--choco);line-height:1}
   .stat-label{font-size:13px;color:var(--muted);margin-top:4px}
   .hero-visual{position:relative}
-  .hero-img-wrap{position:relative;border-radius:30px;overflow:hidden;box-shadow:var(--shadow-lg);transform:rotate(-2deg);transition:var(--transition);background:linear-gradient(135deg,var(--cream-2),var(--rose));min-height:560px;display:flex;align-items:center;justify-content:center}
-  .hero-img-wrap::before{content:'🎂';font-size:120px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);opacity:.3;z-index:0}
+  .hero-img-wrap{position:relative;border-radius:30px;overflow:hidden;box-shadow:var(--shadow-lg);transform:rotate(-2deg);transition:var(--transition);background:linear-gradient(135deg,var(--cream-2),var(--rose));min-height:560px}
   .hero-img-wrap:hover{transform:rotate(0) scale(1.02)}
-  .hero-img-wrap img{width:100%;height:560px;object-fit:cover;position:relative;z-index:1}
+  .hero-img-wrap img{width:100%;height:560px;object-fit:cover}
   .hero-float{position:absolute;background:white;padding:16px 20px;border-radius:18px;box-shadow:var(--shadow);display:flex;align-items:center;gap:12px;animation:bob 4s ease-in-out infinite}
   @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
   .hero-float-1{top:40px;left:-30px}
@@ -84,9 +83,8 @@
   .cakes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
   .cake-card{background:white;border-radius:var(--radius);overflow:hidden;box-shadow:0 4px 20px rgba(107,52,16,.06);transition:var(--transition);position:relative}
   .cake-card:hover{transform:translateY(-10px);box-shadow:var(--shadow-lg)}
-  .cake-img{position:relative;overflow:hidden;height:280px;background:linear-gradient(135deg,var(--cream-2) 0%,var(--rose) 100%);display:flex;align-items:center;justify-content:center}
-  .cake-img::before{content:'🎂';font-size:64px;position:absolute;z-index:0;opacity:.3}
-  .cake-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;position:relative;z-index:1}
+  .cake-img{position:relative;overflow:hidden;height:280px;background:linear-gradient(135deg,var(--cream-2) 0%,var(--rose) 100%)}
+  .cake-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
   .cake-card:hover .cake-img img{transform:scale(1.08)}
   .cake-badge{position:absolute;top:16px;left:16px;padding:6px 14px;border-radius:50px;font-size:12px;font-weight:700;color:white;text-transform:uppercase;letter-spacing:.5px;z-index:2}
   .badge-hit{background:var(--berry)}
@@ -260,7 +258,9 @@
     </div>
     <div class="hero-visual reveal">
       <div class="hero-img-wrap">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Strawberry_cake.jpg/800px-Strawberry_cake.jpg" alt="Авторский торт с ягодами" loading="eager" onerror="this.style.display='none'">
+        <img src="https://cdn.pixabay.com/photo/2019/05/07/10/20/cake-4184851_1280.jpg" 
+             data-fallback="https://images.pexels.com/photos/3482692/pexels-photo-3482692.jpeg?auto=compress&cs=tinysrgb&w=800"
+             alt="Авторский торт с ягодами" loading="eager">
       </div>
       <div class="hero-float hero-float-1">
         <div class="hero-float-icon">🍓</div>
@@ -284,7 +284,9 @@
       <div class="cake-card reveal">
         <div class="cake-img">
           <span class="cake-badge badge-hit">Хит продаж</span>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Strawberry_cake.jpg/600px-Strawberry_cake.jpg" alt="Малиновая нежность" loading="lazy" onerror="this.style.display='none'">
+          <img src="https://cdn.pixabay.com/photo/2017/01/11/11/33/cake-1971552_1280.jpg" 
+               data-fallback="https://images.pexels.com/photos/2244610/pexels-photo-2244610.jpeg?auto=compress&cs=tinysrgb&w=600"
+               alt="Малиновая нежность" loading="lazy">
         </div>
         <div class="cake-body">
           <h3 class="cake-name">Малиновая нежность</h3>
@@ -298,7 +300,9 @@
       <div class="cake-card reveal">
         <div class="cake-img">
           <span class="cake-badge badge-new">Новинка</span>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Melton_Mowbray_cake.jpg/600px-Melton_Mowbray_cake.jpg" alt="Соленая карамель" loading="lazy" onerror="this.style.display='none'">
+          <img src="https://cdn.pixabay.com/photo/2018/10/31/21/05/cake-3786218_1280.jpg" 
+               data-fallback="https://images.pexels.com/photos/1609490/pexels-photo-1609490.jpeg?auto=compress&cs=tinysrgb&w=600"
+               alt="Соленая карамель" loading="lazy">
         </div>
         <div class="cake-body">
           <h3 class="cake-name">Соленая карамель</h3>
@@ -312,7 +316,9 @@
       <div class="cake-card reveal">
         <div class="cake-img">
           <span class="cake-badge badge-kids">Для детей</span>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Chocolate_cake_%288483989812%29.jpg/600px-Chocolate_cake_%288483989812%29.jpg" alt="Шоколадный трюфель" loading="lazy" onerror="this.style.display='none'">
+          <img src="https://cdn.pixabay.com/photo/2016/03/27/21/59/cake-1281958_1280.jpg" 
+               data-fallback="https://images.pexels.com/photos/1106482/pexels-photo-1106482.jpeg?auto=compress&cs=tinysrgb&w=600"
+               alt="Шоколадный трюфель" loading="lazy">
         </div>
         <div class="cake-body">
           <h3 class="cake-name">Шоколадный трюфель</h3>
@@ -501,6 +507,16 @@
 <a href="https://wa.me/78129990000?text=Здравствуйте,%20хочу%20заказать%20торт" class="wa-float" target="_blank"><span>💬</span></a>
 
 <script>
+  // Двойная защита для картинок: если основная не загрузилась - подгружаем резервную
+  document.querySelectorAll('img[data-fallback]').forEach(img => {
+    img.addEventListener('error', function() {
+      if (!this.dataset.tried) {
+        this.dataset.tried = 'true';
+        this.src = this.dataset.fallback;
+      }
+    });
+  });
+
   const header = document.getElementById('header');
   window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 30));
 

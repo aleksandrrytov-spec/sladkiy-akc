@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сладкий Акцент — Авторские торты на заказ в Санкт-Петербурге</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#fff9f3; --cream-2:#f8ece0; --rose:#f4d4cc;
+    --caramel:#d4a574; --caramel-dark:#b8864f;
+    --choco:#6b3410; --berry:#c9435b; --dark:#2c1810;
+    --muted:#7a6a5e; --white:#ffffff;
+    --shadow:0 10px 40px rgba(107,52,16,.12);
+    --shadow-lg:0 20px 60px rgba(107,52,16,.18);
+    --radius:20px;
+    --transition:all .4s cubic-bezier(.22,.61,.36,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Montserrat',sans-serif;color:var(--dark);background:var(--cream);line-height:1.6;overflow-x:hidden}
+  h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:700;line-height:1.2}
+  a{text-decoration:none;color:inherit}
+  img{max-width:100%;display:block}
+  .container{max-width:1240px;margin:0 auto;padding:0 24px}
+
+  header{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rgba(255,249,243,.9);backdrop-filter:blur(14px);transition:var(--transition);border-bottom:1px solid transparent}
+  header.scrolled{padding:12px 0;border-bottom-color:rgba(212,165,116,.2);box-shadow:0 4px 20px rgba(107,52,16,.06)}
+  .nav{display:flex;align-items:center;justify-content:space-between;position:relative}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-size:24px;font-weight:700}
+  .logo-icon{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--caramel),var(--berry));display:flex;align-items:center;justify-content:center;color:white;font-size:20px;box-shadow:0 6px 18px rgba(201,67,91,.3)}
+  .logo span:nth-child(2){color:var(--caramel-dark)}
+  .nav-links{display:flex;gap:36px;list-style:none}
+  .nav-links a{font-size:15px;font-weight:500;position:relative;transition:var(--transition)}
+  .nav-links a::after{content:'';position:absolute;bottom:-6px;left:0;width:0;height:2px;background:var(--caramel);transition:var(--transition)}
+  .nav-links a:hover{color:var(--caramel-dark)}
+  .nav-links a:hover::after{width:100%}
+  .nav-cta{padding:12px 26px;border-radius:50px;background:var(--dark);color:white;font-weight:600;font-size:14px;transition:var(--transition);border:none;cursor:pointer}
+  .nav-cta:hover{background:var(--berry);transform:translateY(-2px);box-shadow:0 10px 24px rgba(201,67,91,.35)}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px}
+  .burger span{width:26px;height:2px;background:var(--dark);transition:var(--transition)}
+
+  .hero{min-height:90vh;padding:140px 0 80px;position:relative;overflow:hidden;background:linear-gradient(135deg,var(--cream) 0%,var(--cream-2) 50%,var(--rose) 100%)}
+  .hero::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(212,165,116,.3),transparent 70%);animation:float 8s ease-in-out infinite}
+  .hero::after{content:'';position:absolute;bottom:-150px;left:-150px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(201,67,91,.2),transparent 70%);animation:float 10s ease-in-out infinite reverse}
+  @keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-30px)}}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center;position:relative;z-index:2}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:50px;background:rgba(255,255,255,.7);backdrop-filter:blur(10px);font-size:13px;font-weight:600;color:var(--choco);margin-bottom:24px;border:1px solid rgba(212,165,116,.3)}
+  .hero-badge::before{content:'🎂';font-size:16px}
+  .hero h1{font-size:clamp(36px,5.5vw,68px);margin-bottom:24px;letter-spacing:-1px}
+  .hero h1 em{font-style:italic;background:linear-gradient(135deg,var(--berry),var(--caramel-dark));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero-text{font-size:18px;color:var(--muted);margin-bottom:36px;max-width:520px}
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:48px}
+  .btn{padding:16px 32px;border-radius:50px;font-weight:600;font-size:15px;cursor:pointer;border:none;transition:var(--transition);display:inline-flex;align-items:center;gap:10px;font-family:inherit}
+  .btn-primary{background:var(--dark);color:white}
+  .btn-primary:hover{background:var(--berry);transform:translateY(-3px);box-shadow:0 14px 30px rgba(201,67,91,.4)}
+  .btn-outline{background:transparent;color:var(--dark);border:2px solid var(--dark)}
+  .btn-outline:hover{background:var(--dark);color:white;transform:translateY(-3px)}
+  .hero-stats{display:flex;gap:32px;flex-wrap:wrap}
+  .stat-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--choco);line-height:1}
+  .stat-label{font-size:13px;color:var(--muted);margin-top:4px}
+  .hero-visual{position:relative}
+  .hero-img-wrap{position:relative;border-radius:30px;overflow:hidden;box-shadow:var(--shadow-lg);transform:rotate(-2deg);transition:var(--transition);background:linear-gradient(135deg,var(--cream-2),var(--rose));min-height:560px;display:flex;align-items:center;justify-content:center}
+  .hero-img-wrap::before{content:'🎂';font-size:120px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);opacity:.3;z-index:0}
+  .hero-img-wrap:hover{transform:rotate(0) scale(1.02)}
+  .hero-img-wrap img{width:100%;height:560px;object-fit:cover;position:relative;z-index:1}
+  .hero-float{position:absolute;background:white;padding:16px 20px;border-radius:18px;box-shadow:var(--shadow);display:flex;align-items:center;gap:12px;animation:bob 4s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  .hero-float-1{top:40px;left:-30px}
+  .hero-float-2{bottom:60px;right:-20px;animation-delay:1.5s}
+  .hero-float-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--caramel),var(--berry));display:flex;align-items:center;justify-content:center;color:white;font-size:20px}
+  .hero-float-title{font-weight:700;font-size:14px}
+  .hero-float-sub{font-size:12px;color:var(--muted)}
+
+  section{padding:100px 0;position:relative}
+  .section-head{text-align:center;margin-bottom:64px}
+  .section-label{display:inline-block;padding:6px 16px;border-radius:50px;background:var(--cream-2);font-size:13px;font-weight:600;color:var(--caramel-dark);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px}
+  .section-title{font-size:clamp(30px,4vw,48px);margin-bottom:16px}
+  .section-title em{font-style:italic;color:var(--berry)}
+
+  .bestsellers{background:var(--cream)}
+  .cakes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+  .cake-card{background:white;border-radius:var(--radius);overflow:hidden;box-shadow:0 4px 20px rgba(107,52,16,.06);transition:var(--transition);position:relative}
+  .cake-card:hover{transform:translateY(-10px);box-shadow:var(--shadow-lg)}
+  .cake-img{position:relative;overflow:hidden;height:280px;background:linear-gradient(135deg,var(--cream-2) 0%,var(--rose) 100%);display:flex;align-items:center;justify-content:center}
+  .cake-img::before{content:'🎂';font-size:64px;position:absolute;z-index:0;opacity:.3}
+  .cake-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;position:relative;z-index:1}
+  .cake-card:hover .cake-img img{transform:scale(1.08)}
+  .cake-badge{position:absolute;top:16px;left:16px;padding:6px 14px;border-radius:50px;font-size:12px;font-weight:700;color:white;text-transform:uppercase;letter-spacing:.5px;z-index:2}
+  .badge-hit{background:var(--berry)}
+  .badge-new{background:var(--caramel-dark)}
+  .badge-kids{background:var(--choco)}
+  .cake-body{padding:26px}
+  .cake-name{font-size:22px;margin-bottom:8px}
+  .cake-desc{font-size:14px;color:var(--muted);margin-bottom:20px;min-height:42px}
+  .cake-foot{display:flex;align-items:center;justify-content:space-between}
+  .cake-price{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--choco)}
+  .cake-price small{font-size:13px;color:var(--muted);font-weight:400;font-family:'Montserrat',sans-serif}
+  .cake-btn{padding:10px 22px;border-radius:50px;background:var(--dark);color:white;font-size:13px;font-weight:600;border:none;cursor:pointer;transition:var(--transition)}
+  .cake-btn:hover{background:var(--berry);transform:scale(1.05)}
+
+  .constructor{background:var(--white);position:relative;overflow:hidden}
+  .constructor-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:center;position:relative;z-index:2}
+  .constructor h2{font-size:clamp(28px,3.5vw,42px);margin-bottom:16px}
+  .constructor-sub{color:var(--muted);margin-bottom:36px;font-size:16px}
+  .step{margin-bottom:28px}
+  .step-label{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;margin-bottom:14px;color:var(--choco)}
+  .step-num{width:28px;height:28px;border-radius:50%;background:var(--dark);color:white;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+  .options{display:flex;flex-wrap:wrap;gap:10px}
+  .option{padding:10px 18px;border-radius:50px;background:var(--cream);border:2px solid transparent;font-size:14px;font-weight:500;cursor:pointer;transition:var(--transition);font-family:inherit}
+  .option:hover{border-color:var(--caramel)}
+  .option.active{background:var(--dark);color:white;border-color:var(--dark)}
+  .summary{background:linear-gradient(135deg,var(--choco),var(--dark));color:white;padding:40px;border-radius:var(--radius);box-shadow:var(--shadow-lg);position:sticky;top:120px}
+  .summary h3{font-size:26px;margin-bottom:8px}
+  .summary-sub{opacity:.7;font-size:14px;margin-bottom:28px}
+  .summary-row{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.15);font-size:14px}
+  .summary-row:last-of-type{border-bottom:none}
+  .summary-row span:first-child{opacity:.7}
+  .summary-row span:last-child{font-weight:600}
+  .summary-total{margin-top:24px;padding-top:24px;border-top:2px solid rgba(255,255,255,.2);display:flex;justify-content:space-between;align-items:center}
+  .summary-total-label{font-size:14px;opacity:.7}
+  .summary-total-price{font-family:'Playfair Display',serif;font-size:36px;font-weight:700}
+  .summary-btn{width:100%;margin-top:24px;padding:16px;border-radius:50px;background:var(--caramel);color:var(--dark);font-weight:700;font-size:15px;border:none;cursor:pointer;transition:var(--transition);font-family:inherit}
+  .summary-btn:hover{background:white;transform:translateY(-2px)}
+
+  .reviews{background:var(--white)}
+  .reviews-track{display:flex;gap:24px;overflow:hidden;position:relative}
+  .reviews-slider{display:flex;gap:24px;transition:transform .6s cubic-bezier(.22,.61,.36,1)}
+  .review-card{flex:0 0 calc(50% - 12px);background:var(--cream);padding:32px;border-radius:var(--radius);position:relative;border:1px solid transparent;transition:var(--transition)}
+  .review-card:hover{border-color:var(--caramel);transform:translateY(-4px)}
+  .review-quote{position:absolute;top:20px;right:24px;font-family:'Playfair Display',serif;font-size:60px;color:var(--caramel);opacity:.3;line-height:1}
+  .review-stars{color:#f5b301;margin-bottom:16px;font-size:15px;letter-spacing:2px}
+  .review-text{font-size:15px;color:var(--dark);margin-bottom:24px;line-height:1.7;min-height:120px}
+  .review-author{display:flex;align-items:center;gap:14px}
+  .review-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--caramel),var(--berry));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px}
+  .review-name{font-weight:700;font-size:15px}
+  .review-meta{font-size:13px;color:var(--muted)}
+  .reviews-nav{display:flex;justify-content:center;gap:12px;margin-top:40px}
+  .reviews-nav button{width:44px;height:44px;border-radius:50%;background:white;border:2px solid var(--cream-2);cursor:pointer;transition:var(--transition);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--dark)}
+  .reviews-nav button:hover{background:var(--dark);color:white;border-color:var(--dark)}
+
+  .faq{background:var(--cream)}
+  .faq-list{max-width:820px;margin:0 auto}
+  .faq-item{background:white;border-radius:16px;margin-bottom:14px;overflow:hidden;box-shadow:0 2px 10px rgba(107,52,16,.04);transition:var(--transition)}
+  .faq-item:hover{box-shadow:var(--shadow)}
+  .faq-q{padding:22px 28px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:20px;font-weight:600;font-size:16px;background:none;border:none;width:100%;text-align:left;font-family:inherit;color:inherit}
+  .faq-toggle{width:32px;height:32px;border-radius:50%;background:var(--cream-2);display:flex;align-items:center;justify-content:center;transition:var(--transition);flex-shrink:0;font-size:18px;color:var(--choco)}
+  .faq-item.open .faq-toggle{background:var(--berry);color:white;transform:rotate(45deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s ease;padding:0 28px;color:var(--muted);font-size:15px;line-height:1.7}
+  .faq-item.open .faq-a{max-height:300px;padding:0 28px 24px}
+
+  .cta{padding:80px 0}
+  .cta-box{background:linear-gradient(135deg,var(--choco) 0%,var(--dark) 100%);border-radius:30px;padding:70px 50px;text-align:center;color:white;position:relative;overflow:hidden}
+  .cta-box::before{content:'';position:absolute;top:-50%;right:-10%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(212,165,116,.3),transparent 70%)}
+  .cta-box::after{content:'';position:absolute;bottom:-50%;left:-10%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(201,67,91,.25),transparent 70%)}
+  .cta-box > *{position:relative;z-index:2}
+  .cta-box h2{font-size:clamp(28px,4vw,44px);margin-bottom:16px}
+  .cta-box p{font-size:17px;opacity:.85;margin-bottom:32px;max-width:520px;margin-left:auto;margin-right:auto}
+  .cta-box .btn-primary{background:var(--caramel);color:var(--dark)}
+  .cta-box .btn-primary:hover{background:white}
+
+  footer{background:var(--dark);color:white;padding:70px 0 30px}
+  .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px;margin-bottom:50px}
+  .footer-logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:16px}
+  .footer-about{font-size:14px;opacity:.7;line-height:1.7;margin-bottom:20px}
+  footer h4{font-size:16px;margin-bottom:20px;font-family:'Montserrat',sans-serif;font-weight:700}
+  footer ul{list-style:none}
+  footer ul li{margin-bottom:10px}
+  footer ul a{font-size:14px;opacity:.7;transition:var(--transition)}
+  footer ul a:hover{opacity:1;color:var(--caramel)}
+  .footer-bottom{padding-top:30px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:13px;opacity:.6}
+
+  .modal{position:fixed;inset:0;z-index:200;background:rgba(44,24,16,.7);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity .3s ease}
+  .modal.active{display:flex;opacity:1}
+  .modal-box{background:white;border-radius:24px;padding:44px;max-width:460px;width:100%;position:relative;transform:scale(.9);transition:transform .3s ease}
+  .modal.active .modal-box{transform:scale(1)}
+  .modal-close{position:absolute;top:18px;right:18px;width:36px;height:36px;border-radius:50%;background:var(--cream);border:none;cursor:pointer;font-size:18px;color:var(--dark);display:flex;align-items:center;justify-content:center;transition:var(--transition)}
+  .modal-close:hover{background:var(--berry);color:white;transform:rotate(90deg)}
+  .modal h3{font-size:28px;margin-bottom:10px}
+  .modal-sub{color:var(--muted);margin-bottom:28px;font-size:15px}
+  .form-group{margin-bottom:16px}
+  .form-group input{width:100%;padding:14px 18px;border:2px solid var(--cream-2);border-radius:12px;font-size:15px;font-family:inherit;transition:var(--transition);background:var(--cream)}
+  .form-group input:focus{outline:none;border-color:var(--caramel);background:white}
+  .modal-btn{width:100%;padding:16px;border-radius:50px;background:var(--dark);color:white;font-weight:700;font-size:15px;border:none;cursor:pointer;transition:var(--transition);font-family:inherit;margin-top:8px}
+  .modal-btn:hover{background:var(--berry)}
+  .modal-privacy{font-size:12px;color:var(--muted);text-align:center;margin-top:16px}
+  .modal-privacy a{color:var(--berry);text-decoration:underline}
+
+  .wa-float{position:fixed;bottom:28px;right:28px;z-index:90;width:60px;height:60px;border-radius:50%;background:#25d366;color:white;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 10px 30px rgba(37,211,102,.4);transition:var(--transition)}
+  .wa-float::before{content:'';position:absolute;inset:-6px;border-radius:50%;background:#25d366;opacity:.4;animation:pulse 2s ease-out infinite}
+  @keyframes pulse{0%{transform:scale(1);opacity:.4}100%{transform:scale(1.5);opacity:0}}
+  .wa-float:hover{transform:scale(1.1) rotate(8deg)}
+  .wa-float span{position:relative;z-index:2}
+
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+
+  @media (max-width:1024px){
+    .hero-grid,.constructor-grid{grid-template-columns:1fr;gap:50px}
+    .cakes-grid{grid-template-columns:repeat(2,1fr)}
+    .review-card{flex:0 0 calc(50% - 12px)}
+    .footer-grid{grid-template-columns:1fr 1fr}
+    .hero-img-wrap img{height:420px}
+  }
+  @media (max-width:680px){
+    section{padding:70px 0}
+    .nav-links,.nav-cta{display:none}
+    .burger{display:flex}
+    .nav-links.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:white;padding:24px;gap:20px;box-shadow:var(--shadow)}
+    .hero{padding:110px 0 60px;min-height:auto}
+    .hero-float{display:none}
+    .cakes-grid,.footer-grid{grid-template-columns:1fr}
+    .review-card{flex:0 0 100%}
+    .hero-stats{gap:24px}
+    .summary{position:static}
+    .cta-box{padding:50px 28px}
+    .modal-box{padding:30px}
+    .wa-float{width:54px;height:54px;font-size:24px;bottom:20px;right:20px}
+  }
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="container nav">
+    <a href="#" class="logo">
+      <span class="logo-icon">🍰</span>
+      <span>Сладкий </span><span>Акцент</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#cakes">Торты</a></li>
+      <li><a href="#constructor">Конструктор</a></li>
+      <li><a href="#reviews">Отзывы</a></li>
+      <li><a href="#faq">Вопросы</a></li>
+    </ul>
+    <a href="tel:+78129990000" class="nav-cta">+7 (812) 999-00-00</a>
+    <button class="burger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="reveal">
+      <span class="hero-badge">Авторские торты в Санкт-Петербурге</span>
+      <h1>Авторские торты, которые <em>влюбляют</em></h1>
+      <p class="hero-text">Кондитерская «Сладкий Акцент». Натуральные ингредиенты, бельгийский шоколад и свежие ягоды. Создадим торт вашей мечты за 24 часа. Дегустация наборов — бесплатно.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" onclick="openModal()">Выбрать торт</button>
+        <a class="btn btn-outline" href="https://wa.me/78129990000?text=Здравствуйте,%20хочу%20заказать%20торт%20в%20СПб" target="_blank">Написать нам</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-num">⭐ 4.9</div><div class="stat-label">Рейтинг</div></div>
+        <div><div class="stat-num">🚚</div><div class="stat-label">Доставка по всему СПб</div></div>
+        <div><div class="stat-num">🌿</div><div class="stat-label">Без пальмового масла</div></div>
+      </div>
+    </div>
+    <div class="hero-visual reveal">
+      <div class="hero-img-wrap">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Strawberry_cake.jpg/800px-Strawberry_cake.jpg" alt="Авторский торт с ягодами" loading="eager" onerror="this.style.display='none'">
+      </div>
+      <div class="hero-float hero-float-1">
+        <div class="hero-float-icon">🍓</div>
+        <div><div class="hero-float-title">Свежие ягоды</div><div class="hero-float-sub">каждый день</div></div>
+      </div>
+      <div class="hero-float hero-float-2">
+        <div class="hero-float-icon">⏱️</div>
+        <div><div class="hero-float-title">За 24 часа</div><div class="hero-float-sub">срочный заказ</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bestsellers" id="cakes">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-label">Хиты продаж</span>
+      <h2 class="section-title">Торты, которые заказывают <em>чаще всего</em> в Петербурге</h2>
+    </div>
+    <div class="cakes-grid">
+      <div class="cake-card reveal">
+        <div class="cake-img">
+          <span class="cake-badge badge-hit">Хит продаж</span>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Strawberry_cake.jpg/600px-Strawberry_cake.jpg" alt="Малиновая нежность" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="cake-body">
+          <h3 class="cake-name">Малиновая нежность</h3>
+          <p class="cake-desc">Ванильный бисквит, малиновый конфи, крем-чиз на маскарпоне</p>
+          <div class="cake-foot">
+            <div class="cake-price">2 800 ₽ <small>/ кг</small></div>
+            <button class="cake-btn" onclick="openModal()">Заказать</button>
+          </div>
+        </div>
+      </div>
+      <div class="cake-card reveal">
+        <div class="cake-img">
+          <span class="cake-badge badge-new">Новинка</span>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Melton_Mowbray_cake.jpg/600px-Melton_Mowbray_cake.jpg" alt="Соленая карамель" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="cake-body">
+          <h3 class="cake-name">Соленая карамель</h3>
+          <p class="cake-desc">Шоколадный брауни, соленая карамель, арахисовый хруст</p>
+          <div class="cake-foot">
+            <div class="cake-price">3 100 ₽ <small>/ кг</small></div>
+            <button class="cake-btn" onclick="openModal()">Заказать</button>
+          </div>
+        </div>
+      </div>
+      <div class="cake-card reveal">
+        <div class="cake-img">
+          <span class="cake-badge badge-kids">Для детей</span>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Chocolate_cake_%288483989812%29.jpg/600px-Chocolate_cake_%288483989812%29.jpg" alt="Шоколадный трюфель" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="cake-body">
+          <h3 class="cake-name">Шоколадный трюфель</h3>
+          <p class="cake-desc">Три вида шоколада, трюфельный крем, какао-бобы</p>
+          <div class="cake-foot">
+            <div class="cake-price">2 900 ₽ <small>/ кг</small></div>
+            <button class="cake-btn" onclick="openModal()">Заказать</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="constructor" id="constructor">
+  <div class="container constructor-grid">
+    <div class="reveal">
+      <span class="section-label">Конструктор</span>
+      <h2>Собери свой <em>идеальный торт</em></h2>
+      <p class="constructor-sub">Простой конструктор от «Сладкий Акцент»</p>
+
+      <div class="step">
+        <div class="step-label"><span class="step-num">1</span> Основа</div>
+        <div class="options" data-group="base">
+          <button class="option active" data-price="800" data-name="Ванильный бисквит">Ванильный бисквит</button>
+          <button class="option" data-price="950" data-name="Красный бархат">Красный бархат</button>
+          <button class="option" data-price="1000" data-name="Шоколадный брауни">Шоколадный брауни</button>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-label"><span class="step-num">2</span> Начинка</div>
+        <div class="options" data-group="filling">
+          <button class="option active" data-price="700" data-name="Вишневый конфи">Вишневый конфи</button>
+          <button class="option" data-price="850" data-name="Манго-маракуйя">Манго-маракуйя</button>
+          <button class="option" data-price="900" data-name="Сникерс">Сникерс</button>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-label"><span class="step-num">3</span> Декор</div>
+        <div class="options" data-group="decor">
+          <button class="option active" data-price="600" data-name="Живые цветы">Живые цветы</button>
+          <button class="option" data-price="500" data-name="Ягоды">Ягоды</button>
+          <button class="option" data-price="800" data-name="Мастика">Мастика</button>
+          <button class="option" data-price="700" data-name="Пряники">Пряники</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary reveal">
+      <h3>Ваш торт</h3>
+      <p class="summary-sub">Итоговая стоимость за 1 кг</p>
+      <div class="summary-row"><span>Основа</span><span id="sumBase">Ванильный бисквит</span></div>
+      <div class="summary-row"><span>Начинка</span><span id="sumFilling">Вишневый конфи</span></div>
+      <div class="summary-row"><span>Декор</span><span id="sumDecor">Живые цветы</span></div>
+      <div class="summary-total">
+        <span class="summary-total-label">Итого за кг</span>
+        <span class="summary-total-price" id="sumTotal">2 100 ₽</span>
+      </div>
+      <button class="summary-btn" onclick="openModal()">Рассчитать стоимость</button>
+    </div>
+  </div>
+</section>
+
+<section class="reviews" id="reviews">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-label">Отзывы клиентов</span>
+      <h2 class="section-title">Нам доверяют <em>самые важные праздники</em> в СПб</h2>
+    </div>
+    <div class="reviews-track reveal">
+      <div class="reviews-slider" id="reviewsSlider">
+        <div class="review-card">
+          <div class="review-quote">"</div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">Заказывали торт на годовщину свадьбы. Это было нечто! Очень нежный крем, в меру сладкий. Гости спрашивали контакты кондитерской весь вечер.</p>
+          <div class="review-author">
+            <div class="review-avatar">А</div>
+            <div>
+              <div class="review-name">Анна К.</div>
+              <div class="review-meta">Годовщина свадьбы</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-quote">"</div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">Спасли ситуацию! Заказал торт за 12 часов до праздника, думал откажут. Но ребята сделали невозможное. Торт привезли вовремя, курьер очень вежливый.</p>
+          <div class="review-author">
+            <div class="review-avatar">С</div>
+            <div>
+              <div class="review-name">Сергей М.</div>
+              <div class="review-meta">Срочный заказ</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-nav">
+      <button onclick="slideReviews(-1)">←</button>
+      <button onclick="slideReviews(1)">→</button>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-label">Частые вопросы</span>
+      <h2 class="section-title">Все, что нужно знать <em>перед заказом</em></h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>За сколько дней нужно делать заказ?</span><div class="faq-toggle">+</div></button>
+        <div class="faq-a">Стандартный срок заказа — 3 дня. Но у нас есть услуга "Срочный торт": мы можем приготовить десерт за 24 часа при наличии свободных слотов. Уточняйте актуальность в WhatsApp.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>Какие аллергены используются?</span><div class="faq-toggle">+</div></button>
+        <div class="faq-a">Мы используем натуральные яйца, молочные продукты, пшеничную муку и орехи. По запросу можем исключить глютен, лактозу или орехи (замена ингредиентов обсуждается индивидуально).</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>Как происходит доставка по СПб?</span><div class="faq-toggle">+</div></button>
+        <div class="faq-a">Доставка осуществляется курьером в специальном термобоксе по всем районам Санкт-Петербурга. Курьеры проходят инструктаж по бережной перевозке тортов.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>Можно ли сделать надпись на торте?</span><div class="faq-toggle">+</div></button>
+        <div class="faq-a">Да, конечно! Мы можем нанести любую надпись пищевыми чернилами, шоколадом или выложить её ягодами. Это входит в стоимость декора.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <div class="cta-box reveal">
+      <h2>Готовы заказать торт мечты?</h2>
+      <p>Оставьте заявку — мы свяжемся с вами в течение 15 минут, поможем выбрать вкус и рассчитаем стоимость</p>
+      <button class="btn btn-primary" onclick="openModal()">Заказать</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo"><span class="logo-icon">🍰</span><span>Сладкий Акцент</span></div>
+        <p class="footer-about">Авторские торты из натуральных ингредиентов в Санкт-Петербурге.</p>
+      </div>
+      <div>
+        <h4>Контакты</h4>
+        <ul>
+          <li><a href="tel:+78129990000">+7 (812) 999-00-00</a></li>
+          <li><a href="#">г. Санкт-Петербург, Невский пр., д. 10</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Информация</h4>
+        <ul>
+          <li><a href="#">Политика конфиденциальности</a></li>
+          <li><a href="#">Обработка персональных данных</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2024 Кондитерская «Сладкий Акцент». Все права защищены.</div>
+    </div>
+  </div>
+</footer>
+
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h3>Оформить заказ</h3>
+    <p class="modal-sub">Оставьте номер телефона, мы свяжемся с вами в течение 15 минут для уточнения деталей.</p>
+    <form onsubmit="submitForm(event)">
+      <div class="form-group"><input type="text" placeholder="Ваше имя" required></div>
+      <div class="form-group"><input type="tel" placeholder="+7 (___) ___-__-__" required></div>
+      <button type="submit" class="modal-btn">Отправить заявку</button>
+    </form>
+    <p class="modal-privacy">Нажимая кнопку, вы соглашаетесь с <a href="#">политикой конфиденциальности</a></p>
+  </div>
+</div>
+
+<a href="https://wa.me/78129990000?text=Здравствуйте,%20хочу%20заказать%20торт" class="wa-float" target="_blank"><span>💬</span></a>
+
+<script>
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 30));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const summary = {
+    base: { name: 'Ванильный бисквит', price: 800 },
+    filling: { name: 'Вишневый конфи', price: 700 },
+    decor: { name: 'Живые цветы', price: 600 }
+  };
+  function updateSummary() {
+    document.getElementById('sumBase').textContent = summary.base.name;
+    document.getElementById('sumFilling').textContent = summary.filling.name;
+    document.getElementById('sumDecor').textContent = summary.decor.name;
+    const total = summary.base.price + summary.filling.price + summary.decor.price;
+    document.getElementById('sumTotal').textContent = total.toLocaleString('ru-RU') + ' ₽';
+  }
+  document.querySelectorAll('.options').forEach(group => {
+    const g = group.dataset.group;
+    group.querySelectorAll('.option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        group.querySelectorAll('.option').forEach(o => o.classList.remove('active'));
+        opt.classList.add('active');
+        summary[g] = { name: opt.dataset.name, price: +opt.dataset.price };
+        updateSummary();
+      });
+    });
+  });
+
+  function toggleFaq(btn) {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  let reviewIdx = 0;
+  const slider = document.getElementById('reviewsSlider');
+  function slideReviews(dir) {
+    const cards = slider.children.length;
+    const visible = window.innerWidth > 1024 ? 2 : 1;
+    const max = cards - visible;
+    reviewIdx = Math.max(0, Math.min(max, reviewIdx + dir));
+    const cardW = slider.children[0].offsetWidth + 24;
+    slider.style.transform = `translateX(-${reviewIdx * cardW}px)`;
+  }
+  setInterval(() => slideReviews(1), 6000);
+
+  function openModal() { document.getElementById('modal').classList.add('active'); document.body.style.overflow = 'hidden'; }
+  function closeModal() { document.getElementById('modal').classList.remove('active'); document.body.style.overflow = ''; }
+  document.getElementById('modal').addEventListener('click', e => { if (e.target.id === 'modal') closeModal(); });
+  function submitForm(e) {
+    e.preventDefault();
+    alert('Спасибо! Мы свяжемся с вами в течение 15 минут 🍰');
+    closeModal();
+    e.target.reset();
+  }
+</script>
+
+</body>
+</html>
